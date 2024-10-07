@@ -57,24 +57,32 @@ fn setup(mut commands: Commands) {
     ));
 
     // define platform size
-    let platform_size = Vec2::new(200.0, 30.0);
+    let plats = vec![
+        // (position.x, position.y, Vec2::new(size.x, size.y))
+        (0.0, 0.0, Vec2::new(200.0, 30.0)),
+        (200.0, 50.0, Vec2::new(200.0, 30.0)),
+        (400.0, 100.0, Vec2::new(200.0, 30.0)),
+        (600.0, 150.0, Vec2::new(200.0, 30.0)),
+    ];
 
     // spawn platforms
-    commands.spawn((
-        Platform,
-        Collider {
-            size: platform_size,
-        },
-        SpriteBundle {
-            sprite: Sprite {
-                color: Color::BLACK,
-                custom_size: Some(platform_size),
+    for (x, y, size) in plats {
+        commands.spawn((
+            Platform,
+            Collider {
+                size,
+            },
+            SpriteBundle {
+                sprite: Sprite {
+                    color: Color::BLACK,
+                    custom_size: Some(size),
+                    ..default()
+                },
+                transform: Transform::from_xyz(x, y, 0.0),
                 ..default()
             },
-            transform: Transform::from_xyz(0.0, -100.0, 0.0),
-            ..default()
-        },
-    ));
+        ));
+    }
 }
 
 fn player_movement(
