@@ -1,5 +1,9 @@
 use bevy::prelude::*;
 
+const PLAYER_SPEED: f32 = 200.0;
+const JUMP_POWER: f32 = 300.0;
+const GRAVITY: f32 = -9.8 * 100.0;
+
 #[derive(Component)]
 struct Player {
     speed: f32,
@@ -26,7 +30,7 @@ fn setup(mut commands: Commands) {
 
     // spawn player
     commands.spawn((
-        Player { speed: 200.0, jump_power: 300.0, velocity: Vec2::ZERO, is_grounded: false },
+        Player { speed: PLAYER_SPEED, jump_power: JUMP_POWER, velocity: Vec2::ZERO, is_grounded: false },
         SpriteBundle {
             sprite: Sprite {
                 color: Color::srgba(1.0, 0.0, 0.0, 1.0), // RED color using RGB values
@@ -93,7 +97,7 @@ fn apply_gravity(
     time: Res<Time>,
 ) {
     let (mut player, mut player_transform) = player_query.single_mut();
-    let gravity =  -9.8 * 100.0;
+    let gravity = GRAVITY;
 
     player.velocity.y += gravity * time.delta_seconds();
     player_transform.translation.y += player.velocity.y * time.delta_seconds();
