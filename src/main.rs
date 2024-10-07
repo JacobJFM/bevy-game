@@ -1,7 +1,7 @@
 use bevy::{color::palettes::css::*, math::bounding::*, prelude::*};
 
-const PLAYER_SPEED: f32 = 200.0;
-const JUMP_POWER: f32 = 300.0;
+const PLAYER_SPEED: f32 = 250.0;
+const JUMP_POWER: f32 = 400.0;
 const GRAVITY: f32 = -9.8 * 100.0;
 const PLAYER_SIZE: (f32, f32) = (50.0, 50.0);
 
